@@ -11,8 +11,9 @@ package gp02_.pkg0910._denisebruce;
  */
 public class Bricks {
     
-      private double length_ADB; 
+    private double length_ADB; 
     private double width_ADB;
+    private double height_ADB; 
     private double price_ADB; 
     private double CONVERTFEET = 12; 
     
@@ -22,9 +23,10 @@ public class Bricks {
      * @param p_ADB the price of the brick. 
      */
     
-    Bricks(double len_ADB, double w_ADB, double p_ADB)
+    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
     { 
         length_ADB = len_ADB; 
+        height_ADB = h_ADB; 
         width_ADB = w_ADB; 
         price_ADB = p_ADB; 
         
@@ -39,7 +41,15 @@ public class Bricks {
      length_ADB = len_ADB; 
     }
     
-    /*The setLength method stores a value in the length field. 
+    /*The setHeight method stores a value in the length field. 
+    @param height_ADB 
+    */ 
+    
+    public void  setHeight(double h_ADB)
+    {
+     height_ADB = h_ADB; 
+    }
+    /*The setWidth method stores a value in the length field. 
     @param length_ADB 
     */ 
     
@@ -62,6 +72,14 @@ public class Bricks {
     public double getLength() 
     {
         return length_ADB; 
+    }
+    
+     /**The getHeight method returns the wall objects Height. 
+     * @return the value of height_ADB field
+     */
+    public double getHeight() 
+    {
+        return height_ADB; 
     }
     
     /** The getWidth method returns the wall objects width.

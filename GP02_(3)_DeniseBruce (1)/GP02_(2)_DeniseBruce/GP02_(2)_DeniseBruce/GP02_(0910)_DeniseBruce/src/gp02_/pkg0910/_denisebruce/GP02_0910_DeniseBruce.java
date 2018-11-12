@@ -43,12 +43,16 @@ public class GP02_0910_DeniseBruce {
       System.out.println("Enter the  width of the brick in inches:");
       double brickWidth = keyboard.nextDouble();  
       
+      //User input for brickWidth 
+      System.out.println("Enter the  height of the brick in inches:");
+      double brickHeight = keyboard.nextDouble();  
+      
       //User input for cost of each brick
       System.out.println("Enter the price of each brick:");
       double brickCost = keyboard.nextDouble();
       
       //Creates Brick Ojbect 
-      Bricks myBrick = new Bricks(brickLength, brickWidth, brickCost);
+      Bricks myBrick = new Bricks(brickLength, brickWidth, brickHeight,  brickCost);
       
       
       // Total area of the walls 
