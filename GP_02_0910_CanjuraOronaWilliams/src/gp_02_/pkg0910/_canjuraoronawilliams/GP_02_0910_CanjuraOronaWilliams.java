@@ -6,25 +6,122 @@
 */
 package gp_02_.pkg0910._canjuraoronawilliams;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
+
 public class GP_02_0910_CanjuraOronaWilliams 
 {
     public static Scanner keyboard = new Scanner(System.in);
  
     public static void main(String[] args) 
     {
-        String keepGoing;
+        int choice = 0;
         
         do
-        {
-            getStructure();  
-            System.out.println("Would you like to try again(y/n)?");
-            keepGoing = keyboard.next();
-            keepGoing = keepGoing.toLowerCase();
+        {   
+            choice = menu();
+            getChosenMethods(choice);
         }
-        while ("y".equals(keepGoing));
+        while (choice != 3);
+    }
+    
+    public static int menu()
+    {
+        String input;
+        int choice = 0;
+        boolean gateA = false;       
+          
+        while (gateA != true || choice<=0 || choice>3)
+        {
+            //collects structure dimensions and assigns them to an object
+            System.out.println("What is the length of the structure?(Use Feet) ");
+            
+            if (keyboard.hasNextInt())
+            {
+                input = keyboard.next();
+                choice = Integer.parseInt(input);
+                gateA = true;
+            }
+            else
+            {
+                input = keyboard.next();
+            }
+        }  
+        
+        return choice;
+    }
+    
+    public static void getChosenMethods(int choice)
+    {
+        if (choice == 1)
+        {
+            getWalls();
+        }
+        if (choice == 2)
+        {
+            getStructure(); 
+        }
+    }
+    
+    public static void getWalls
+    {
+        double totalProjectArea_ADB = 0; 
+        double wallTotalarea_ADB = 0;
+        
+        System.out.print ("How many walls are you covering?");
+      double wallNumber = keyboard.nextDouble(); 
+      
+      
+       // Total area of the voids aka Doors and windows 
+        double voidTotalarea_ADB = 0;
+      // Loop for each wall. 
+      for( double wallnum = 1; wallnum <= wallNumber; wallnum++ )
+      //User input for the length and width of the wall to be covered 
+      { 
+          System.out.println("Enter the length of the walls in feet: ");
+      
+      double wallLength = keyboard.nextDouble();
+      
+      System.out.println("Enter the width of the walls in feet: ");
+      double wallWidth = keyboard.nextDouble();  
+      //
+      Walls myWall = new Walls (wallLength, wallWidth);
+      
+        
+        
+      //Number of voids in the wall.
+      System.out.print ("How many doors, windows, or vents are in the walls?");
+      double voidNumber_ADB = keyboard.nextDouble(); 
+      
+      // Loop for each wall. 
+      for( double voidnum_ADB = 1; voidnum_ADB <= voidNumber_ADB; voidnum_ADB++ )
+      //User input for the length and width of the wall to be covered 
+      { 
+          System.out.println("Enter the length of the door, window, or vent in feet: ");
+      
+      double voidLength_ADB = keyboard.nextDouble();
+      
+      System.out.println("Enter the width of the door, window, or vent in feet: ");
+      double voidWidth_ADB = keyboard.nextDouble();  
+      //
+      Doors_and_Windows myVoid = new Doors_and_Windows (voidLength_ADB, voidWidth_ADB);
+     
+      voidTotalarea_ADB =  voidTotalarea_ADB +  myVoid.getArea();  
+      
+      } 
+      
+      wallTotalarea_ADB =  wallTotalarea_ADB +  myWall.getArea();  
+      
+      } 
+       
+       totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
+       double totalBricks = totalProjectArea_ADB/myBrick.getArea();
+      DecimalFormat myformat = new DecimalFormat("#,###.00");
+      System.out.println("total number of bricks you will need; " + 
+              myformat.format(totalBricks));
+       
     }
     
     public static void getStructure()
