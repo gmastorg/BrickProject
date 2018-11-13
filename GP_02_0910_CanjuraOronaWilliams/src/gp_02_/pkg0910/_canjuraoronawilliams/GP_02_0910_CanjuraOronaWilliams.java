@@ -35,8 +35,8 @@ public class GP_02_0910_CanjuraOronaWilliams
           
         while (gateA != true || choice<=0 || choice>3)
         {
-            //collects structure dimensions and assigns them to an object
-            System.out.println("What is the length of the structure?(Use Feet) ");
+            System.out.println("1.Get bricks for a wall\n2.Get bricks for a "
+                    + "structure\n3.Exit");
             
             if (keyboard.hasNextInt())
             {
