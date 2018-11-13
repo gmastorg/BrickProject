@@ -97,4 +97,32 @@ public class Bricks
 
         return bricksWithExtra;       
     }
+    
+    public double getTotalBricks(double voidsArea, Bricks brick,double wallTotalarea_ADB)
+    {
+        double brickArea;
+        double numofBricks;
+        double bricksWithExtra;
+        double [] brickSizeFeetWMortar = brick.convertToFeetAddMortar();
+        
+        brickArea = brickSizeFeetWMortar[0] * brickSizeFeetWMortar[1];
+
+        numofBricks = wallTotalarea_ADB/ brickArea;
+
+        numofBricks = numofBricks -(voidsArea/brickArea);
+
+        bricksWithExtra = numofBricks*1.05;
+        
+        int bricks = (int)(bricksWithExtra);      
+        
+        if (bricksWithExtra%bricks !=0)
+            bricksWithExtra = (double)(bricks+1);
+
+        return bricksWithExtra;       
+    }
+    
+    /**The getsqftArea method return the brick object area in feet. 
+     * 
+     * @return the product of length times 12 inches, and 
+     */
 }
