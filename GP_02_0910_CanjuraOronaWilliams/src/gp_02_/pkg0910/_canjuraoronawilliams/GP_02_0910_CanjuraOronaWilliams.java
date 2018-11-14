@@ -70,21 +70,63 @@ public class GP_02_0910_CanjuraOronaWilliams
         ArrayList<Voids> voids = new ArrayList<Voids>();
         double totalProjectArea_ADB = 0; 
         double wallTotalarea_ADB = 0;
+        String input;
+        double length = 0;
+        double width = 0;
+        boolean gateA = false;
+        double wallNumber = 0.0;
         
-        System.out.print ("How many walls are you covering?");
-        double wallNumber = keyboard.nextDouble(); 
+        while (gateA != true || wallNumber<=0)
+            {
+                System.out.print ("How many walls are you covering?");
+      
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    wallNumber = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
  
         for( double wallnum = 1; wallnum <= wallNumber; wallnum++ )
         //User input for the length and width of the wall to be covered 
         { 
-            System.out.println("Enter the length of the walls in feet: ");
+            while (gateA != true || length<=0)
+            {
+                System.out.println("Enter the length of the walls in feet: ");
       
-            double wallLength = keyboard.nextDouble();
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    length = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
+            while (gateA != true || width<=0)
+            {
+                System.out.println("Enter the width of the walls in feet: ");
       
-            System.out.println("Enter the width of the walls in feet: ");
-            double wallWidth = keyboard.nextDouble();  
-            //
-            Walls myWall = new Walls (wallLength, wallWidth);
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    width = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
+            
+            Walls myWall = new Walls (length, width);
       
             voids = getVoids();
       
@@ -168,20 +210,63 @@ public class GP_02_0910_CanjuraOronaWilliams
     
     public static ArrayList<Voids> getVoids()
     {
-        System.out.println("How many doors would you like to enter?");
-        int doors = keyboard.nextInt();
+        String input;
+        boolean gateA = false;
+        int doors = 0;
+        double length = 0;
+        double width = 0;
         
+        while (gateA != true || doors<=0)
+        {
+            System.out.println("How many doors would you like to enter?");
+            if (keyboard.hasNextInt())
+            {
+                input = keyboard.next();
+                doors = Integer.parseInt(input);
+                gateA = true;
+            }
+            else
+            {
+                input = keyboard.next();
+            }
+        }
+                
         ArrayList<Voids> voids = new ArrayList<Voids>();
         
         for (int i=0; i<doors; i++)
         {
             String name = "Door";
-            System.out.println("Enter length:(Use Feet)");
-            double length= keyboard.nextDouble();
+            while (gateA != true || length<=0)
+            {
+                //collects structure dimensions and assigns them to an object
+                System.out.println("Enter length:(Use Feet)");
             
-            System.out.println("Enter width:(Use Feet)");
-            double width= keyboard.nextDouble();
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    length = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
             
+            while (gateA != true || width<=0)
+            {
+                System.out.println("Enter width:(Use Feet)");
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    width = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }            
             voids.add(new Voids(name,length, width));
         }
         
@@ -191,11 +276,37 @@ public class GP_02_0910_CanjuraOronaWilliams
           for (int i=0; i<windows; i++)
         {
             String name = "Window";
-            System.out.println("Enter length:(Use Feet)");
-            double length= keyboard.nextDouble();
+            while (gateA != true || length<=0)
+            {
+                //collects structure dimensions and assigns them to an object
+                System.out.println("Enter length:(Use Feet)");
             
-            System.out.println("Enter width:(Use Feet)");
-            double width= keyboard.nextDouble();
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    length = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
+            
+            while (gateA != true || width<=0)
+            {
+                System.out.println("Enter width:(Use Feet)");
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    width = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }   
             
             voids.add(new Voids(name,length, width));
         }
