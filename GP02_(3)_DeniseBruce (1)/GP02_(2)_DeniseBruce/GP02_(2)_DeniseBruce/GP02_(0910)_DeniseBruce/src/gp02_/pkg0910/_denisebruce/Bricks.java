@@ -9,13 +9,14 @@ package gp02_.pkg0910._denisebruce;
  *
  * @author denise
  */
-public class Bricks {
+public abstract class Bricks {
     
     protected double LENGTH_ADB; 
     protected double WIDTH_ADB;
     protected double HEIGHT_ADB; 
     private double price_ADB; 
     protected double CONVERTFEET = 12; 
+    protected String color_ADB; 
     
     /** Constructor 
      * @param len_ADB The length of the brick.
@@ -23,49 +24,29 @@ public class Bricks {
      * @param p_ADB the price of the brick. 
      */
     
-    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
+    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB, String c_ADB)
     { 
         LENGTH_ADB = len_ADB; 
         HEIGHT_ADB = h_ADB; 
         WIDTH_ADB = w_ADB; 
         price_ADB = p_ADB; 
+        color_ADB = c_ADB;  
         
     }
-    
-   /*The setLength method stores a value in the length field. 
-    @param LENGTH_ADB 
-    */ 
-    
-    public void  setLength(double len_ADB)
-    {
-     LENGTH_ADB = len_ADB; 
-    }
-    
-    /*The setHeight method stores a value in the length field. 
-    @param HEIGHT_ADB 
-    */ 
-    
-    public void  setHeight(double h_ADB)
-    {
-     HEIGHT_ADB = h_ADB; 
-    }
-    /*The setWidth method stores a value in the length field. 
-    @param LENGTH_ADB 
-    */ 
-    
-    public void  setWidth(double w_ADB)
-    {
-     WIDTH_ADB = w_ADB; 
-    }
-    
-    /*The setPrice method stores a value in the price field. 
-    @ pram price_ADB 
-    */
+
     public void setPrice (double p_ADB)
     {
         price_ADB = p_ADB; 
     }
     
+    /* The setColor method stores a string in the color field. 
+      @pram color_ADB 
+    */
+   public void setColor(String c_ADB) 
+   { 
+      color_ADB = c_ADB;
+   }
+      
     /**The getLength method returns the wall objects length. 
      * @return the value of LENGTH_ADB field
      */
@@ -118,7 +99,10 @@ public class Bricks {
        return (LENGTH_ADB/CONVERTFEET) * (WIDTH_ADB/CONVERTFEET);
    }
    
-  
+   public String getColor() 
+   { 
+       return (color_ADB);
+   }
           
           
 }

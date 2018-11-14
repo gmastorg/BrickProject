@@ -26,7 +26,7 @@ public class GP02_0910_DeniseBruce {
         
         double totalProjectArea_ADB = 0; 
         double wallTotalarea_ADB = 0;
-        
+      
        // User input for brick information and wall information. 
       System.out.print ("Welcome to the brick estimator.\n"
             +  "This program accounts for a 3/8 of an inch mortar joint \n"
@@ -51,8 +51,11 @@ public class GP02_0910_DeniseBruce {
       System.out.println("Enter the price of each brick:");
       double brickCost = keyboard.nextDouble();
       
+        System.out.println("Enter the price of each brick:");
+     String brickColor = keyboard.nextLine();
+      
       //Creates Brick Ojbect 
-      Bricks myBrick = new Bricks(brickLength, brickWidth, brickHeight,  brickCost);
+      Bricks myBrick = new Bricks(brickLength, brickWidth, brickHeight,  brickCost, brickColor);
       
       
       // Total area of the walls 
