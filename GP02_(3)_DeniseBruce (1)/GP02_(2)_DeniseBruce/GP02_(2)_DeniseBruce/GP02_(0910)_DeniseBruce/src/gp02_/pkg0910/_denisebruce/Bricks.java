@@ -11,11 +11,11 @@ package gp02_.pkg0910._denisebruce;
  */
 public class Bricks {
     
-    private double length_ADB; 
-    private double width_ADB;
-    private double height_ADB; 
+    protected double LENGTH_ADB; 
+    protected double WIDTH_ADB;
+    protected double HEIGHT_ADB; 
     private double price_ADB; 
-    private double CONVERTFEET = 12; 
+    protected double CONVERTFEET = 12; 
     
     /** Constructor 
      * @param len_ADB The length of the brick.
@@ -25,37 +25,37 @@ public class Bricks {
     
     Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
     { 
-        length_ADB = len_ADB; 
-        height_ADB = h_ADB; 
-        width_ADB = w_ADB; 
+        LENGTH_ADB = len_ADB; 
+        HEIGHT_ADB = h_ADB; 
+        WIDTH_ADB = w_ADB; 
         price_ADB = p_ADB; 
         
     }
     
    /*The setLength method stores a value in the length field. 
-    @param length_ADB 
+    @param LENGTH_ADB 
     */ 
     
     public void  setLength(double len_ADB)
     {
-     length_ADB = len_ADB; 
+     LENGTH_ADB = len_ADB; 
     }
     
     /*The setHeight method stores a value in the length field. 
-    @param height_ADB 
+    @param HEIGHT_ADB 
     */ 
     
     public void  setHeight(double h_ADB)
     {
-     height_ADB = h_ADB; 
+     HEIGHT_ADB = h_ADB; 
     }
     /*The setWidth method stores a value in the length field. 
-    @param length_ADB 
+    @param LENGTH_ADB 
     */ 
     
     public void  setWidth(double w_ADB)
     {
-     width_ADB = w_ADB; 
+     WIDTH_ADB = w_ADB; 
     }
     
     /*The setPrice method stores a value in the price field. 
@@ -67,32 +67,32 @@ public class Bricks {
     }
     
     /**The getLength method returns the wall objects length. 
-     * @return the value of length_ADB field
+     * @return the value of LENGTH_ADB field
      */
     public double getLength() 
     {
-        return length_ADB; 
+        return LENGTH_ADB; 
     }
     
      /**The getHeight method returns the wall objects Height. 
-     * @return the value of height_ADB field
+     * @return the value of HEIGHT_ADB field
      */
     public double getHeight() 
     {
-        return height_ADB; 
+        return HEIGHT_ADB; 
     }
     
     /** The getWidth method returns the wall objects width.
-     * @return  the value of the width_ADB field 
+     * @return  the value of the WIDTH_ADB field 
      */
     
     public double getWidth()
     { 
-        return width_ADB;
+        return WIDTH_ADB;
     }
     
     /** The getWidth method returns the wall objects width.
-     * @return  the value of the width_ADB field 
+     * @return  the value of the WIDTH_ADB field 
      */
     
     public double getPrice()
@@ -106,7 +106,7 @@ public class Bricks {
     
     public double getArea ()
     {
-        return length_ADB * width_ADB; 
+        return LENGTH_ADB * WIDTH_ADB; 
     }
     
     /**The getsqftArea method return the brick object area in feet. 
@@ -115,7 +115,7 @@ public class Bricks {
      */
    public double getsqftArea() 
    { 
-       return (length_ADB/CONVERTFEET) * (width_ADB/CONVERTFEET);
+       return (LENGTH_ADB/CONVERTFEET) * (WIDTH_ADB/CONVERTFEET);
    }
    
   
