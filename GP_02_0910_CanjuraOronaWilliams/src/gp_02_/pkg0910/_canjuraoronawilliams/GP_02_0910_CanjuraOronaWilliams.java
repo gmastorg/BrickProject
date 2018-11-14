@@ -70,6 +70,10 @@ public class GP_02_0910_CanjuraOronaWilliams
         ArrayList<Voids> voids = new ArrayList<Voids>();
         double totalProjectArea_ADB = 0; 
         double wallTotalarea_ADB = 0;
+        String input;
+        double length = 0;
+        double width = 0;
+        boolean gateA = false;
         
         System.out.print ("How many walls are you covering?");
         double wallNumber = keyboard.nextDouble(); 
@@ -77,14 +81,38 @@ public class GP_02_0910_CanjuraOronaWilliams
         for( double wallnum = 1; wallnum <= wallNumber; wallnum++ )
         //User input for the length and width of the wall to be covered 
         { 
-            System.out.println("Enter the length of the walls in feet: ");
+            while (gateA != true || length<=0)
+            {
+                System.out.println("Enter the length of the walls in feet: ");
       
-            double wallLength = keyboard.nextDouble();
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    length = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
+            while (gateA != true || length<=0)
+            {
+                System.out.println("Enter the width of the walls in feet: ");
       
-            System.out.println("Enter the width of the walls in feet: ");
-            double wallWidth = keyboard.nextDouble();  
-            //
-            Walls myWall = new Walls (wallLength, wallWidth);
+                if (keyboard.hasNextDouble())
+                {
+                    input = keyboard.next();
+                    width = Double.parseDouble(input);
+                    gateA = true;
+                }
+                else
+                {
+                    input = keyboard.next();
+                }
+            }
+            
+            Walls myWall = new Walls (length, width);
       
             voids = getVoids();
       
