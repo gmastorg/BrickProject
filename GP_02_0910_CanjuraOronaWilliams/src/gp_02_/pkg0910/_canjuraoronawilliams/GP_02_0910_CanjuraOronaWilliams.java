@@ -138,8 +138,8 @@ public class GP_02_0910_CanjuraOronaWilliams
         // Loop for each wall. 
        
        totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
-       Bricks brick = getBrickDimensions();
-       getCost(voids,voidTotalarea_ADB,brick,wallTotalarea_ADB);   
+       ExtrudedBrick brick = getBrickDimensions();
+       getCost(voids, voidTotalarea_ADB, brick, wallTotalarea_ADB);   
        
     }
     
@@ -203,7 +203,7 @@ public class GP_02_0910_CanjuraOronaWilliams
 
             voids = getVoids();
             double voidsArea = getVoidArea(voids);
-            Bricks brick = getBrickDimensions();
+            ExtrudedBrick brick = getBrickDimensions();
             getCost(voids,voidsArea,brick,structure);    
      
     }
@@ -325,28 +325,21 @@ public class GP_02_0910_CanjuraOronaWilliams
         return totalArea;
     }
     
-    public static Bricks getBrickDimensions()
+    public static ExtrudedBrick getBrickDimensions()
     {       
-        System.out.println("Enter the dimensions and cost for the bricks you would "
-                + "like to use.(Use inches)\nLength:");
-        double length = keyboard.nextDouble();
-        System.out.println("Width:");
-        double width = keyboard.nextDouble();
-        System.out.println("Height:");
-        double height = keyboard.nextDouble();
-        System.out.println("Cost:");
-        double cost = keyboard.nextDouble();
+        // Changed to use extruded bricks until we're sure how we're setting
+        // up letting the user decide which bricks to buy
           
-        Bricks myBrick = new Bricks(length,height,width,cost);
+       ExtrudedBrick myBrick = new ExtrudedBrick(8, 4, 2, .51);
         
         return myBrick;
     }
      
-    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, Structure structure)
+    public static void getCost(ArrayList<Voids> voids,double voidsArea, ExtrudedBrick brick, Structure structure)
     { 
         double totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
         
-        double cost = totalBricks*brick.getbrickCost();
+        double cost = totalBricks*brick.getBrickCost();
         
         String str_cost = String.format("$%,.2f",cost);
         
@@ -366,12 +359,12 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         System.out.println("The Structure you wish to create has the following"
                 + " dimensions: (LxHxW)");
-        System.out.println(structure.getLength()+" x "+structure.getHeight()+" x "
-        +structure.getWidth());
+        System.out.println(structure.getLength()+" x " + structure.getHeight()+ " x "
+        + structure.getWidth());
         System.out.println("You entered that your structure has the following "
                 + "number of doors and windows:");
-        System.out.println("Windows: "+windows);
-        System.out.println("Doors: "+doors);
+        System.out.println("Windows: " + windows);
+        System.out.println("Doors: " + doors);
         System.out.println("The following removes the spaces for doors and windows.");
         System.out.println("Bricks: "+totalBricks);      
         System.out.println("Cost: "+str_cost);
@@ -381,7 +374,7 @@ public class GP_02_0910_CanjuraOronaWilliams
     { 
         double totalBricks = brick.getTotalBricks(voidsArea, brick, wallTotalarea_ADB);
         
-        double cost = totalBricks*brick.getbrickCost();
+        double cost = totalBricks*brick.getBrickCost();
         
         String str_cost = String.format("$%,.2f",cost);
         

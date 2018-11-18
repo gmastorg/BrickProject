@@ -10,65 +10,105 @@ package gp_02_.pkg0910._canjuraoronawilliams;
  *
  * @author canjurag4010
  */
-public class Bricks 
-{
-    private double brickLength; 
-    private double brickHeight;
-    private double brickWidth;
-    private double brickCost;
+ public abstract class Bricks 
+ {
+     
+    protected double LENGTH_ADB; 
+    protected double WIDTH_ADB;
+    protected double HEIGHT_ADB; 
+    public double price_ADB; 
+    protected double CONVERTFEET = 12; 
+    //protected String color_ADB; 
     
-    public Bricks (double len, double height, double width, double cost)
-    {
-        brickLength = len;
-        brickHeight = height;
-        brickWidth = width;
-        brickCost = cost;        
-               
+    /** Constructor 
+     * @param len_ADB The length of the brick.
+     * @param w_ADB the width of the brick. 
+     * @param p_ADB the price of the brick. 
+     */
+    
+    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
+    { 
+        LENGTH_ADB = 8; 
+        HEIGHT_ADB = 4; 
+        WIDTH_ADB = 2; 
+        price_ADB = 0;   
     }
-    public void setbrickLength(double len)
+
+    public void setPrice (double p_ADB)
     {
-        brickLength = len;
-    }
-    
-    public void setbrickWidth(double width)
-    {
-        brickWidth = width;
-    }
-    
-    public void setbrickHeight(double height)
-    {
-        brickHeight = height;
-    } 
-    
-    public void setbrickCost(double cost)
-    {
-        brickCost = cost;
+        price_ADB = p_ADB; 
     }
     
-    public double getbrickLength()
+    /** The setColor method stores a string in the color field. Not implemented
+     * yet
+    
+      @pram color_ADB 
+    **/
+   
+   /* 
+   public void setColor(String c_ADB) 
+   { 
+      color_ADB = c_ADB;
+   }
+    */
+      
+    /**The getLength method returns the wall objects length. 
+     * @return the value of LENGTH_ADB field
+     */
+    public double getLength() 
     {
-        return brickLength;
+        return LENGTH_ADB; 
     }
     
-    public double getbrickWidth()
+     /**The getHeight method returns the wall objects Height. 
+     * @return the value of HEIGHT_ADB field
+     */
+    public double getHeight() 
     {
-        return brickWidth;
+        return HEIGHT_ADB; 
     }
     
-    public double getbrickHeight()
-    {
-        return brickHeight;
+    /** The getWidth method returns the wall objects width.
+     * @return  the value of the WIDTH_ADB field 
+     */
+    
+    public double getWidth()
+    { 
+        return WIDTH_ADB;
     }
     
-    public double getbrickCost()
-    {
-        return brickCost;
+    /** The getWidth method returns the wall objects width.
+     * @return  the value of the WIDTH_ADB field 
+     */
+    
+    public double getBrickCost()
+    { 
+        return price_ADB;
     }
-    public double [] convertToFeetAddMortar()
+    
+    /** The getArea method returns the wall objects area. 
+     * @return the product of length times width. 
+     */
+    
+    public double getArea ()
+    {
+        return LENGTH_ADB * WIDTH_ADB; 
+    }
+    
+    /**The getsqftArea method return the brick object area in feet. 
+     * 
+     * @return the product of length times 12 inches, and 
+     */
+   public double getsqftArea() 
+   { 
+       return (LENGTH_ADB/CONVERTFEET) * (WIDTH_ADB/CONVERTFEET);
+   }
+   
+   public double [] convertToFeetAddMortar()
     {        
-        double brickFeetLength = (brickLength/12)+(.375/12);
-        double brickFeetHeight = (brickHeight/12)+(.375/12);
-        double brickFeetWidth = (brickWidth/12);  
+        double brickFeetLength = (LENGTH_ADB/12)+(.375/12);
+        double brickFeetHeight = (HEIGHT_ADB/12)+(.375/12);
+        double brickFeetWidth = (WIDTH_ADB/12);  
         
         double [] brickSizeFeetWMortar = {brickFeetLength, brickFeetHeight, brickFeetWidth};
         
@@ -120,9 +160,12 @@ public class Bricks
 
         return bricksWithExtra;       
     }
+       
+   /** Not yet implemented
+   public String getColor() 
+   { 
+       return (color_ADB);
+   }
+   **/
     
-    /**The getsqftArea method return the brick object area in feet. 
-     * 
-     * @return the product of length times 12 inches, and 
-     */
-}
+}        
