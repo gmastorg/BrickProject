@@ -24,8 +24,6 @@ public class GP_02_0910_CanjuraOronaWilliams
             {
                 int brickChoice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
                 Bricks myBrick = getBricks(brickChoice);
-                System.out.println(myBrick.getBrickCost());
-                System.out.println(myBrick.getPalletCost());
                 int structChoice = InputValidation.validateMenu(StandardMessages.StructMenu(), 2);
                 getChosenMethods(structChoice, myBrick);
             }
@@ -172,8 +170,6 @@ public class GP_02_0910_CanjuraOronaWilliams
     { 
         int totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
         
-        System.out.println(totalBricks);
-        
         //gets cost of bricks
         double brickCost = MaterialCosts.costs(brick, totalBricks);
        
@@ -222,8 +218,6 @@ public class GP_02_0910_CanjuraOronaWilliams
     public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double wallTotalarea_ADB)
     { 
         int totalBricks = brick.getTotalBricks(voidsArea, brick, wallTotalarea_ADB);
-        
-        System.out.println(totalBricks);
         
         double brickCost = MaterialCosts.costs(brick, totalBricks);
                
