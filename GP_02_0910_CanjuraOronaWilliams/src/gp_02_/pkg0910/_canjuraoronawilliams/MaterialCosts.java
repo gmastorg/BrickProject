@@ -31,12 +31,8 @@ public class MaterialCosts
     }
     
     public static double getMortarPrice(int totalBricks)
-    {
-        System.out.println(totalBricks);
-        
-        double totalBags = getBagsOfMortar(totalBricks);
-        System.out.println(totalBags);
-        
+    {       
+        double totalBags = getBagsOfMortar(totalBricks);        
         double mortarCost = totalBags * pricePerBag;
         return mortarCost;
     }
@@ -48,7 +44,6 @@ public class MaterialCosts
         double regCostBricks;
         double cost;
         
-        System.out.println(brick.getBrickCost());
         if (bricks >= 2500)
         {
              numOfPallets = bricks/500;
