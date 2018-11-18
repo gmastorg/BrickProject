@@ -11,68 +11,37 @@ package gp_02_.pkg0910._canjuraoronawilliams;
  */
 public class HandMoldedBrick extends Bricks
 {
-    HandMoldedBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB,double palP_GMC)
+    HandMoldedBrick(String type, double p_ADB,double palP_GMC)
     { 
-        super(len_ADB, w_ADB, p_ADB, h_ADB, palP_GMC);
-    }
-    
-    public double [] convertToFeetAddMortar()
-    {        
-        double brickFeetLength = (LENGTH_ADB/12)+(.375/12);
-        double brickFeetHeight = (HEIGHT_ADB/12)+(.375/12);
-        double brickFeetWidth = (WIDTH_ADB/12);  
-        
-        double [] brickSizeFeetWMortar = {brickFeetLength, brickFeetHeight, brickFeetWidth};
-        
-        return brickSizeFeetWMortar;
-    }
-    
-    public int getTotalBricks(double voidsArea, Bricks brick,Structure structure)
-    {
-        double brickArea;
-        double numofBricks;
-        double bricksWithExtra;
-        double [] brickSizeFeetWMortar = brick.convertToFeetAddMortar();
-        
-        brickArea = brickSizeFeetWMortar[0] * brickSizeFeetWMortar[1];
-
-        numofBricks = structure.calculateSurfaceArea(brick)/ brickArea;
-
-        numofBricks = numofBricks -(voidsArea/brickArea);
-
-        bricksWithExtra = numofBricks*1.05;
-        
-        int bricks = (int)(bricksWithExtra);      
-        
-        if (bricksWithExtra%bricks !=0)
-            bricks += 1;
-
-        return bricks;       
+        super(type, p_ADB, palP_GMC);
+        Type_GMC = "Hand Molded";
+        price_ADB = .91;
+        palletPrice_GMC = 800.00;        
     }
     
     @Override
-    public double getTotalBricks(double voidsArea, Bricks brick, double wallTotalarea_ADB)
+    public String getBrickType()
+    { 
+        return Type_GMC;
+    }
+    
+        /** The getWidth method returns the brick objects cost.
+     * @return  the value of the price_ADB field 
+     */
+    
+    @Override
+    public double getBrickCost()
+    { 
+        return price_ADB;
+    }
+    
+    /** The getWidth method returns the brick objects pallet cost.
+     * @return  the value of the palletPrice_GMC field 
+     */
+    
+    @Override
+    public double getPalletCost()
     {
-        double brickArea;
-        double numofBricks;
-        double bricksWithExtra;
-        double [] brickSizeFeetWMortar = brick.convertToFeetAddMortar();
-        
-        brickArea = brickSizeFeetWMortar[0] * brickSizeFeetWMortar[1];
-
-        numofBricks = wallTotalarea_ADB/ brickArea;
-
-        numofBricks = numofBricks -(voidsArea/brickArea);
-
-        bricksWithExtra = numofBricks*1.05;
-        
-        int bricks = (int)(bricksWithExtra);      
-        
-        if (bricksWithExtra%bricks !=0)
-        {
-            bricks += 1;
-        }
-        
-        return bricks;   
+        return palletPrice_GMC;
     }
 }

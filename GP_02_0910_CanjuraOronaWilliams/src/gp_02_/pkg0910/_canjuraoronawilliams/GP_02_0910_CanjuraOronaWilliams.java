@@ -6,9 +6,7 @@
 */
 package gp_02_.pkg0910._canjuraoronawilliams;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 import java.util.ArrayList;
 
 public class GP_02_0910_CanjuraOronaWilliams 
@@ -16,19 +14,25 @@ public class GP_02_0910_CanjuraOronaWilliams
     public static Scanner keyboard = new Scanner(System.in);
  
     public static void main(String[] args) 
-    {
-        int choice = 0;
+    {  
+        int choice;  
         
         do
         {   
-            int brickChoice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
-            Bricks myBrick = getBricks(brickChoice);
-            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 3);
-            getChosenMethods(choice, myBrick);
+            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 2);
+            if (choice == 1 )
+            {
+                int brickChoice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
+                Bricks myBrick = getBricks(brickChoice);
+                System.out.println(myBrick.getBrickCost());
+                System.out.println(myBrick.getPalletCost());
+                int structChoice = InputValidation.validateMenu(StandardMessages.StructMenu(), 2);
+                getChosenMethods(structChoice, myBrick);
+            }
         }
-        while (choice != 3);
+        while (choice != 2);
     }
-        
+
     public static void getChosenMethods(int choice, Bricks myBrick)
     {
         if (choice == 1)
@@ -150,15 +154,15 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         if (choice == 1)
         {
-            myBrick = new ExtrudedBrick(8.0, 4.0, 2.0,.51,400.00);
+            myBrick = new ExtrudedBrick("Extruded",.51,400.00);
         }
         if (choice == 2)
         {
-            myBrick = new SandBrick(8.0, 4.0, 2.0,.71,600.00);
+            myBrick = new SandBrick("Sand Molded",.71,600.00);
         }
         if (choice == 3)
         {
-            myBrick = new HandMoldedBrick(8.0, 4.0, 2.0,.91,800.00);
+            myBrick = new HandMoldedBrick("Hand Molded",.91,800.00);
         }
             
         return myBrick;
@@ -168,11 +172,19 @@ public class GP_02_0910_CanjuraOronaWilliams
     { 
         int totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
         
-        double brickCost = MaterialCosts.costs(brick, totalBricks);
+        System.out.println(totalBricks);
         
+        //gets cost of bricks
+        double brickCost = MaterialCosts.costs(brick, totalBricks);
+       
+        //gets cost of mortar
         double mortarCost = MaterialCosts.getMortarPrice(totalBricks);
         
-        double cost = brickCost + mortarCost; 
+        //gets any discounts
+        double [] discount = MaterialCosts.getDiscount();
+        
+        //gets total cost
+        double cost = brickCost*discount[0] + mortarCost*discount[1]; 
         
         String str_cost = String.format("$%,.2f",cost);
         
@@ -190,6 +202,8 @@ public class GP_02_0910_CanjuraOronaWilliams
             }
         }
         
+        //output
+        System.out.println("Type of Brick: "+brick.getBrickType());     
         System.out.println("The Structure you wish to create has the following"
                 + " dimensions: (LxHxW)");
         System.out.println(structure.getLength()+" x " + structure.getHeight()+ " x "
@@ -198,16 +212,28 @@ public class GP_02_0910_CanjuraOronaWilliams
                 + "number of doors and windows:");
         System.out.println("Windows: " + windows);
         System.out.println("Doors: " + doors);
-        System.out.println("The following removes the spaces for doors and windows.");
+        System.out.println("The following total removes the spaces for doors "
+            + "and windows. It also includes 5% more bricks for incidentals.");
         System.out.println("Bricks: "+totalBricks);      
         System.out.println("Cost: "+str_cost);
+        System.out.println("Cost includes any applicable discounts.");
     }
     
-    /*public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double wallTotalarea_ADB)
+    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double wallTotalarea_ADB)
     { 
         int totalBricks = brick.getTotalBricks(voidsArea, brick, wallTotalarea_ADB);
         
+        System.out.println(totalBricks);
+        
         double brickCost = MaterialCosts.costs(brick, totalBricks);
+               
+        double mortarCost = MaterialCosts.getMortarPrice(totalBricks);
+        
+        //gets any discounts
+        double [] discount = MaterialCosts.getDiscount();
+        
+        //gets total cost
+        double cost = brickCost*discount[0] + mortarCost*discount[1]; 
         
         String str_cost = String.format("$%,.2f",cost);
         
@@ -225,14 +251,17 @@ public class GP_02_0910_CanjuraOronaWilliams
             }
         }
         
+        System.out.println("Type of Brick: "+brick.getBrickType());
         System.out.println("The total area for your wall(s) is: ");
         System.out.println(wallTotalarea_ADB);
         System.out.println("You entered that your wall(s) have the following "
                 + "number of doors and windows:");
         System.out.println("Windows: "+windows);
         System.out.println("Doors: "+doors);
-        System.out.println("The following removes the spaces for doors and windows.");
+        System.out.println("The following total removes the spaces for doors "
+            + "and windows. It also includes 5% more bricks for incidentals.");
         System.out.println("Bricks: "+totalBricks);      
         System.out.println("Cost: "+str_cost);
-    }*/
+        System.out.println("Cost includes any applicable discounts.");
+    }
 }

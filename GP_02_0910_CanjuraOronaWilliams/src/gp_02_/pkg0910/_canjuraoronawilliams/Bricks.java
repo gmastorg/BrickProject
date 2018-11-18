@@ -12,12 +12,12 @@ package gp_02_.pkg0910._canjuraoronawilliams;
  */
  public abstract class Bricks 
  {
-     
+    public String Type_GMC; 
     protected double LENGTH_ADB; 
     protected double WIDTH_ADB;
     protected double HEIGHT_ADB; 
-    public double price_ADB; 
     protected double CONVERTFEET = 12; 
+    public double price_ADB; 
     public double palletPrice_GMC;
     //protected String color_ADB; 
     
@@ -27,13 +27,14 @@ package gp_02_.pkg0910._canjuraoronawilliams;
      * @param p_ADB the price of the brick. 
      */
     
-    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB,double palP_GMC)
+    Bricks(String type, double p_ADB, double palP_GMC)
     { 
+        Type_GMC = type;
         LENGTH_ADB = 8; 
-        HEIGHT_ADB = 4; 
-        WIDTH_ADB = 2; 
-        price_ADB = 0;   
-        palletPrice_GMC = 0;
+        HEIGHT_ADB = 2; 
+        WIDTH_ADB = 4; 
+        price_ADB = p_ADB;   
+        palletPrice_GMC = palP_GMC;
     }
 
     /** The setColor method stores a string in the color field. Not implemented
@@ -48,7 +49,12 @@ package gp_02_.pkg0910._canjuraoronawilliams;
       color_ADB = c_ADB;
    }
     */
-      
+    
+    public String getBrickType()
+    { 
+        return Type_GMC;
+    }
+    
     /**The getLength method returns the wall objects length. 
      * @return the value of LENGTH_ADB field
      */
@@ -73,23 +79,18 @@ package gp_02_.pkg0910._canjuraoronawilliams;
     { 
         return WIDTH_ADB;
     }
-    
-    /** The getWidth method returns the brick objects cost.
+        /** The getWidth method returns the brick objects cost.
      * @return  the value of the price_ADB field 
      */
     
-   public double getBrickCost()
-    { 
-        return price_ADB;
-    }
+   public abstract double getBrickCost();
+    
     
    /** The getWidth method returns the brick objects pallet cost.
      * @return  the value of the palletPrice_GMC field 
      */
-    public double getPalletCost()
-    {
-        return palletPrice_GMC;
-    }
+    public abstract double getPalletCost();
+
     
     /** The getArea method returns the wall objects area. 
      * @return the product of length times width. 
@@ -145,7 +146,7 @@ package gp_02_.pkg0910._canjuraoronawilliams;
         return bricks;       
     }
     
-    public double getTotalBricks(double voidsArea, Bricks brick,double wallTotalarea_ADB)
+    public int getTotalBricks(double voidsArea, Bricks brick,double wallTotalarea_ADB)
     {
         double brickArea;
         double numofBricks;
