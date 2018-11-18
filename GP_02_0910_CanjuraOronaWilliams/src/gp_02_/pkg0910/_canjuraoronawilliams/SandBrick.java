@@ -37,7 +37,7 @@ public class SandBrick extends Bricks
         return brickSizeFeetWMortar;
     }
     
-        public double getTotalBricks(double voidsArea, Bricks brick,Structure structure)
+    public int getTotalBricks(double voidsArea, Bricks brick,Structure structure)
     {
         double brickArea;
         double numofBricks;
@@ -55,11 +55,12 @@ public class SandBrick extends Bricks
         int bricks = (int)(bricksWithExtra);      
         
         if (bricksWithExtra%bricks !=0)
-            bricksWithExtra = (double)(bricks+1);
+            bricks += 1;
 
-        return bricksWithExtra;       
+        return bricks;       
     }
-    
+   
+    @Override
     public double getTotalBricks(double voidsArea, Bricks brick,double wallTotalarea_ADB)
     {
         double brickArea;
@@ -78,8 +79,10 @@ public class SandBrick extends Bricks
         int bricks = (int)(bricksWithExtra);      
         
         if (bricksWithExtra%bricks !=0)
-            bricksWithExtra = (double)(bricks+1);
-
-        return bricksWithExtra;       
+        {
+            bricks += 1;
+        }
+        
+        return bricks;   
     }
 }

@@ -21,25 +21,27 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         do
         {   
+            int brickChoice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
+            Bricks myBrick = getBricks(brickChoice);
             choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 3);
-            getChosenMethods(choice);
+            getChosenMethods(choice, myBrick);
         }
         while (choice != 3);
     }
         
-    public static void getChosenMethods(int choice)
+    public static void getChosenMethods(int choice, Bricks myBrick)
     {
         if (choice == 1)
         {
-            getWalls();
+            getWalls(myBrick);
         }
         if (choice == 2)
         {
-            getStructure(); 
+            getStructure(myBrick); 
         }
     }
     
-    public static void getWalls()
+    public static void getWalls(Bricks myBrick)
     {   
         ArrayList<Voids> voids = new ArrayList<Voids>();
         double totalProjectArea_ADB = 0; 
@@ -47,9 +49,9 @@ public class GP_02_0910_CanjuraOronaWilliams
         double length;
         double width ;
         
-        double wallNumber = InputValidation.validateDouble(StandardMessages.Walls());
+        int wallNumber = InputValidation.validateInteger(StandardMessages.Walls());
  
-        for( double wallnum = 0; wallnum <= wallNumber; wallnum++ )
+        for(int wallnum = 0; wallnum <wallNumber; wallnum++)
         //User input for the length and width of the wall to be covered 
         { 
             length = InputValidation.validateDouble(StandardMessages.Length());
@@ -60,22 +62,18 @@ public class GP_02_0910_CanjuraOronaWilliams
       
             voids = getVoids();
       
-            wallTotalarea_ADB =  wallTotalarea_ADB +  myWall.getArea();  
+            wallTotalarea_ADB += myWall.getArea();  
         } 
         
         // Total area of the voids aka Doors and windows 
         double voidTotalarea_ADB = getVoidArea(voids);
-        
-        int choice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
-        Bricks myBrick = getBricks(choice);
         totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
         getCost(voids, voidTotalarea_ADB, myBrick, wallTotalarea_ADB);   
        
     }
     
-    public static void getStructure()
+    public static void getStructure(Bricks myBrick)
     {
-        Bricks myBrick;
         double length;
         double height;
         double width;
@@ -92,8 +90,6 @@ public class GP_02_0910_CanjuraOronaWilliams
 
         voids = getVoids();
         double voidsArea = getVoidArea(voids);
-        int choice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
-        myBrick = getBricks(choice);
         getCost(voids,voidsArea,myBrick,structure);    
      
     }
@@ -170,9 +166,13 @@ public class GP_02_0910_CanjuraOronaWilliams
      
     public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, Structure structure)
     { 
-        double totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
+        int totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
         
-        double cost = totalBricks*brick.getBrickCost();
+        double brickCost = MaterialCosts.costs(brick, totalBricks);
+        
+        double mortarCost = MaterialCosts.getMortarPrice(totalBricks);
+        
+        double cost = brickCost + mortarCost; 
         
         String str_cost = String.format("$%,.2f",cost);
         
@@ -203,11 +203,11 @@ public class GP_02_0910_CanjuraOronaWilliams
         System.out.println("Cost: "+str_cost);
     }
     
-        public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double wallTotalarea_ADB)
+    /*public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double wallTotalarea_ADB)
     { 
-        double totalBricks = brick.getTotalBricks(voidsArea, brick, wallTotalarea_ADB);
+        int totalBricks = brick.getTotalBricks(voidsArea, brick, wallTotalarea_ADB);
         
-        double cost = totalBricks*brick.getBrickCost();
+        double brickCost = MaterialCosts.costs(brick, totalBricks);
         
         String str_cost = String.format("$%,.2f",cost);
         
@@ -234,5 +234,5 @@ public class GP_02_0910_CanjuraOronaWilliams
         System.out.println("The following removes the spaces for doors and windows.");
         System.out.println("Bricks: "+totalBricks);      
         System.out.println("Cost: "+str_cost);
-    }
+    }*/
 }
