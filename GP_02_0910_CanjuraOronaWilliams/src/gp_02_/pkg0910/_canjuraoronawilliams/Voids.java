@@ -18,6 +18,7 @@ public class Voids
 
     /**
      * Constructor
+     * @param name door or window
      * @param len The length of the rectangle
      * @param wid The width of the rectangle
      */
@@ -29,16 +30,18 @@ public class Voids
         width = wid;
     }
     
-    
-    /**
+     /**
      * The setLength method stores a value in the length field
-     * @param len The value to store in length
-     */    
+     * @param name The value to store door or window
+     */   
     public void setName(String name)
     {
         Name = name;
     }
-    
+     /**
+     * The setLength method stores a value in the length field
+     * @param len The value to store in length
+     */ 
     public void setLength(double len)
     {
         length = len;
