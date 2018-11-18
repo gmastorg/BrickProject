@@ -11,15 +11,9 @@ package gp_02_.pkg0910._canjuraoronawilliams;
  */
 public class HandMoldedBrick extends Bricks
 {
-    HandMoldedBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
+    HandMoldedBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB,double palP_GMC)
     { 
-        super(len_ADB, w_ADB, p_ADB, h_ADB); 
-        price_ADB = .91;
-    }
-    
-    public double getBrickCost()
-    { 
-        return price_ADB;
+        super(len_ADB, w_ADB, p_ADB, h_ADB, palP_GMC);
     }
     
     public double [] convertToFeetAddMortar()

@@ -11,17 +11,11 @@ package gp_02_.pkg0910._canjuraoronawilliams;
  */
 public class ExtrudedBrick extends Bricks
 {
-    ExtrudedBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
+    ExtrudedBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB,double palP_GMC)
     { 
-        super(len_ADB, w_ADB, p_ADB, h_ADB);
-        price_ADB = .51; 
+        super(len_ADB, w_ADB, p_ADB, h_ADB, palP_GMC);
     }
-    
-    public double getBrickCost()
-    { 
-        return price_ADB;
-    }
-    
+       
     public double [] convertToFeetAddMortar()
     {        
         double brickFeetLength = (LENGTH_ADB/12)+(.375/12);

@@ -11,15 +11,19 @@ package gp_02_.pkg0910._canjuraoronawilliams;
  */
 public class SandBrick extends Bricks
 {
-    SandBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
+    SandBrick(double len_ADB, double w_ADB, double p_ADB,double h_ADB,double palP_GMC)
     { 
-        super(len_ADB, w_ADB, p_ADB, h_ADB);
-        price_ADB = .71;
+        super(len_ADB, w_ADB, p_ADB, h_ADB, palP_GMC);
     }
     
     public double getBrickCost()
     { 
         return price_ADB;
+    }
+    
+    public double getPalletCost()
+    {
+        return palletPrice_GMC;
     }
     
     public double [] convertToFeetAddMortar()

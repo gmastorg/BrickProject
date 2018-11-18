@@ -18,6 +18,7 @@ package gp_02_.pkg0910._canjuraoronawilliams;
     protected double HEIGHT_ADB; 
     public double price_ADB; 
     protected double CONVERTFEET = 12; 
+    public double palletPrice_GMC;
     //protected String color_ADB; 
     
     /** Constructor 
@@ -26,19 +27,15 @@ package gp_02_.pkg0910._canjuraoronawilliams;
      * @param p_ADB the price of the brick. 
      */
     
-    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB)
+    Bricks(double len_ADB, double w_ADB, double p_ADB,double h_ADB,double palP_GMC)
     { 
         LENGTH_ADB = 8; 
         HEIGHT_ADB = 4; 
         WIDTH_ADB = 2; 
         price_ADB = 0;   
+        palletPrice_GMC = 0;
     }
 
-    public void setPrice (double p_ADB)
-    {
-        price_ADB = p_ADB; 
-    }
-    
     /** The setColor method stores a string in the color field. Not implemented
      * yet
     
@@ -77,13 +74,21 @@ package gp_02_.pkg0910._canjuraoronawilliams;
         return WIDTH_ADB;
     }
     
-    /** The getWidth method returns the wall objects width.
-     * @return  the value of the WIDTH_ADB field 
+    /** The getWidth method returns the brick objects cost.
+     * @return  the value of the price_ADB field 
      */
     
-    public double getBrickCost()
+   public double getBrickCost()
     { 
         return price_ADB;
+    }
+    
+   /** The getWidth method returns the brick objects pallet cost.
+     * @return  the value of the palletPrice_GMC field 
+     */
+    public double getPalletCost()
+    {
+        return palletPrice_GMC;
     }
     
     /** The getArea method returns the wall objects area. 

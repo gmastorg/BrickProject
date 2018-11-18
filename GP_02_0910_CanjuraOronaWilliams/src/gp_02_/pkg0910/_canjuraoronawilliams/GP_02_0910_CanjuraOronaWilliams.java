@@ -21,38 +21,12 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         do
         {   
-            choice = menu();
+            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 3);
             getChosenMethods(choice);
         }
         while (choice != 3);
     }
-    
-    public static int menu()
-    {
-        String input;
-        int choice = 0;
-        boolean gateA = false;       
-          
-        while (gateA != true || choice<=0 || choice>3)
-        {
-            System.out.println("1.Get bricks for a wall\n2.Get bricks for a "
-                    + "structure\n3.Exit");
-            
-            if (keyboard.hasNextInt())
-            {
-                input = keyboard.next();
-                choice = Integer.parseInt(input);
-                gateA = true;
-            }
-            else
-            {
-                input = keyboard.next();
-            }
-        }  
         
-        return choice;
-    }
-    
     public static void getChosenMethods(int choice)
     {
         if (choice == 1)
@@ -70,62 +44,18 @@ public class GP_02_0910_CanjuraOronaWilliams
         ArrayList<Voids> voids = new ArrayList<Voids>();
         double totalProjectArea_ADB = 0; 
         double wallTotalarea_ADB = 0;
-        String input;
-        double length = 0;
-        double width = 0;
-        boolean gateA = false;
-        double wallNumber = 0.0;
+        double length;
+        double width ;
         
-        while (gateA != true || wallNumber<=0)
-            {
-                System.out.print ("How many walls are you covering?");
-      
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    wallNumber = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }
+        double wallNumber = InputValidation.validateDouble(StandardMessages.Walls());
  
-        for( double wallnum = 1; wallnum <= wallNumber; wallnum++ )
+        for( double wallnum = 0; wallnum <= wallNumber; wallnum++ )
         //User input for the length and width of the wall to be covered 
         { 
-            while (gateA != true || length<=0)
-            {
-                System.out.println("Enter the length of the walls in feet: ");
-      
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    length = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }
-            while (gateA != true || width<=0)
-            {
-                System.out.println("Enter the width of the walls in feet: ");
-      
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    width = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }
+            length = InputValidation.validateDouble(StandardMessages.Length());
             
+            width = InputValidation.validateDouble(StandardMessages.Width());
+                  
             Walls myWall = new Walls (length, width);
       
             voids = getVoids();
@@ -135,178 +65,71 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         // Total area of the voids aka Doors and windows 
         double voidTotalarea_ADB = getVoidArea(voids);
-        // Loop for each wall. 
-       
-       totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
-       ExtrudedBrick brick = getBrickDimensions();
-       getCost(voids, voidTotalarea_ADB, brick, wallTotalarea_ADB);   
+        
+        int choice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
+        Bricks myBrick = getBricks(choice);
+        totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
+        getCost(voids, voidTotalarea_ADB, myBrick, wallTotalarea_ADB);   
        
     }
     
     public static void getStructure()
     {
-        String input;
-        double length = 0;
-        double height = 0;
-        double width = 0;
-        boolean gateA = false;
+        Bricks myBrick;
+        double length;
+        double height;
+        double width;
         
-        while (gateA != true || length<=0)
-        {
-            //collects structure dimensions and assigns them to an object
-            System.out.println("What is the length of the structure?(Use Feet) ");
+        length = InputValidation.validateDouble(StandardMessages.Length());
             
-            if (keyboard.hasNextDouble())
-            {
-                input = keyboard.next();
-                length = Double.parseDouble(input);
-                gateA = true;
-            }
-            else
-            {
-                input = keyboard.next();
-            }
-        }    
-        while (gateA != true || height<=0)
-        {
-            System.out.println("What is the height of the structure?(Use Feet) ");
-            if (keyboard.hasNextDouble())
-            {
-                input = keyboard.next();
-                height = Double.parseDouble(input);
-                gateA = true;
-            }
-            else
-            {
-                input = keyboard.next();
-            }
-        }
+        width = InputValidation.validateDouble(StandardMessages.Width()); 
         
-        while (gateA != true || width<=0)
-        {
-            System.out.println("What is the width of the structure?(Use Feet) ");
-            if (keyboard.hasNextDouble())
-            {
-                input = keyboard.next();
-                width = Double.parseDouble(input);
-                gateA = true;
-            }
-            else
-            {
-                input = keyboard.next();
-            }
-        }
+        height = InputValidation.validateDouble(StandardMessages.Height()); 
+                   
+        Structure structure = new Structure(length, height, width);
             
-            Structure structure = new Structure(length, height, width);
-            
-            ArrayList<Voids> voids = new ArrayList<Voids>();
+        ArrayList<Voids> voids = new ArrayList<Voids>();
 
-            voids = getVoids();
-            double voidsArea = getVoidArea(voids);
-            ExtrudedBrick brick = getBrickDimensions();
-            getCost(voids,voidsArea,brick,structure);    
+        voids = getVoids();
+        double voidsArea = getVoidArea(voids);
+        int choice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
+        myBrick = getBricks(choice);
+        getCost(voids,voidsArea,myBrick,structure);    
      
     }
     
     public static ArrayList<Voids> getVoids()
     {
-        String input;
-        boolean gateA = false;
-        int doors = 0;
-        double length = 0;
-        double width = 0;
+        int doors;
+        double length;
+        double width ;
+        int windows;
         
-        while (gateA != true || doors<=0)
-        {
-            System.out.println("How many doors would you like to enter?");
-            if (keyboard.hasNextInt())
-            {
-                input = keyboard.next();
-                doors = Integer.parseInt(input);
-                gateA = true;
-            }
-            else
-            {
-                input = keyboard.next();
-            }
-        }
+        doors = InputValidation.validateInteger(StandardMessages.Doors());
                 
         ArrayList<Voids> voids = new ArrayList<Voids>();
         
         for (int i=0; i<doors; i++)
         {
             String name = "Door";
-            while (gateA != true || length<=0)
-            {
-                //collects structure dimensions and assigns them to an object
-                System.out.println("Enter length:(Use Feet)");
             
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    length = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }
+            length = InputValidation.validateDouble(StandardMessages.Length());
             
-            while (gateA != true || width<=0)
-            {
-                System.out.println("Enter width:(Use Feet)");
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    width = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }            
+            width = InputValidation.validateDouble(StandardMessages.Width());  
+            
             voids.add(new Voids(name,length, width));
         }
         
-        System.out.println("How many windows would you like to enter?");
-        int windows = keyboard.nextInt();
+        windows = InputValidation.validateInteger(StandardMessages.Windows());
         
           for (int i=0; i<windows; i++)
         {
             String name = "Window";
-            while (gateA != true || length<=0)
-            {
-                //collects structure dimensions and assigns them to an object
-                System.out.println("Enter length:(Use Feet)");
             
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    length = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }
+            //collects windows dimensions and assigns them to an object
+            length = InputValidation.validateDouble(StandardMessages.Length());
             
-            while (gateA != true || width<=0)
-            {
-                System.out.println("Enter width:(Use Feet)");
-                if (keyboard.hasNextDouble())
-                {
-                    input = keyboard.next();
-                    width = Double.parseDouble(input);
-                    gateA = true;
-                }
-                else
-                {
-                    input = keyboard.next();
-                }
-            }   
+            width = InputValidation.validateDouble(StandardMessages.Width());   
             
             voids.add(new Voids(name,length, width));
         }
@@ -325,17 +148,27 @@ public class GP_02_0910_CanjuraOronaWilliams
         return totalArea;
     }
     
-    public static ExtrudedBrick getBrickDimensions()
-    {       
-        // Changed to use extruded bricks until we're sure how we're setting
-        // up letting the user decide which bricks to buy
-          
-       ExtrudedBrick myBrick = new ExtrudedBrick(8, 4, 2, .51);
+    public static Bricks getBricks( int choice)
+    {   
+        Bricks myBrick = null;
         
+        if (choice == 1)
+        {
+            myBrick = new ExtrudedBrick(8.0, 4.0, 2.0,.51,400.00);
+        }
+        if (choice == 2)
+        {
+            myBrick = new SandBrick(8.0, 4.0, 2.0,.71,600.00);
+        }
+        if (choice == 3)
+        {
+            myBrick = new HandMoldedBrick(8.0, 4.0, 2.0,.91,800.00);
+        }
+            
         return myBrick;
     }
      
-    public static void getCost(ArrayList<Voids> voids,double voidsArea, ExtrudedBrick brick, Structure structure)
+    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, Structure structure)
     { 
         double totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
         
