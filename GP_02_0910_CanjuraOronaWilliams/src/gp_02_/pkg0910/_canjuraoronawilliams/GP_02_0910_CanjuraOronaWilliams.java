@@ -243,7 +243,7 @@ public class GP_02_0910_CanjuraOronaWilliams
             else
             {
                 windows +=1;
-            }
+            } 
         }
         
         System.out.println("Type of Brick: "+brick.getBrickType());
