@@ -1,7 +1,7 @@
 /*09/26/2018
   CSC 251
   Brick Calculator
-  Canjura_Orona_Williams
+  Canjura_Orona_Williams_Villafan_Bruce_Henry
   calculates the number of bricks used to build a structure
 */
 package gp_02_.pkg0910._canjuraoronawilliams;
