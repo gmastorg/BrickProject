@@ -225,6 +225,7 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         //gets any discounts
         double [] discount = MaterialCosts.getDiscount();
+        System.out.println(discount[0]+" "+discount[1]);
         
         //gets total cost
         double cost = brickCost*discount[0] + mortarCost*discount[1]; 
