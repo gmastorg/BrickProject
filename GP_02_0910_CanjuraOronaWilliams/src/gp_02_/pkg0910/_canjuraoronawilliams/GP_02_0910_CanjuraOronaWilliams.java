@@ -70,7 +70,7 @@ public class GP_02_0910_CanjuraOronaWilliams
         // Total area of the voids aka Doors and windows 
         double voidTotalarea_ADB = getVoidArea(voids);
         totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
-        getCost(voids, voidTotalarea_ADB, myBrick, wallTotalarea_ADB);   
+        getCost(voids, voidTotalarea_ADB, myBrick, totalProjectArea_ADB);   
        
     }
     
@@ -215,9 +215,9 @@ public class GP_02_0910_CanjuraOronaWilliams
         System.out.println("Cost includes any applicable discounts.");
     }
     
-    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double wallTotalarea_ADB)
+    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double totalProjectArea_ADB)
     { 
-        int totalBricks = brick.getTotalBricks(voidsArea, brick, wallTotalarea_ADB);
+        int totalBricks = brick.getTotalBricks(voidsArea, brick, totalProjectArea_ADB);
         
         double brickCost = MaterialCosts.costs(brick, totalBricks);
                
@@ -248,7 +248,7 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         System.out.println("Type of Brick: "+brick.getBrickType());
         System.out.println("The total area for your wall(s) is: ");
-        System.out.println(wallTotalarea_ADB);
+        System.out.println(totalProjectArea_ADB);
         System.out.println("You entered that your wall(s) have the following "
                 + "number of doors and windows:");
         System.out.println("Windows: "+windows);
