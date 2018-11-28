@@ -46,6 +46,7 @@ public class GP_02_0910_CanjuraOronaWilliams
     public static void getWalls(Bricks myBrick)
     {   
         ArrayList<Voids> voids = new ArrayList<Voids>();
+        ArrayList<ArrayList> allVoids = new ArrayList<ArrayList>();
         double totalProjectArea_ADB = 0; 
         double wallTotalarea_ADB = 0;
         double length;
@@ -61,16 +62,18 @@ public class GP_02_0910_CanjuraOronaWilliams
             width = InputValidation.validateDouble(StandardMessages.Width());
                   
             Walls myWall = new Walls (length, width);
-      
+            
             voids = getVoids();
-      
+            
+            allVoids.add(voids);
+            
             wallTotalarea_ADB += myWall.getArea();  
         } 
         
         // Total area of the voids aka Doors and windows 
-        double voidTotalarea_ADB = getVoidArea(voids);
+        double voidTotalarea_ADB = getVoidAreaWall(allVoids);
         totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
-        getCost(voids, voidTotalarea_ADB, myBrick, totalProjectArea_ADB);   
+        getCost(allVoids, voidTotalarea_ADB, myBrick, totalProjectArea_ADB);   
        
     }
     
@@ -120,7 +123,7 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         windows = InputValidation.validateInteger(StandardMessages.Windows());
         
-          for (int i=0; i<windows; i++)
+        for (int i=0; i<windows; i++)
         {
             String name = "Window";
             
@@ -135,9 +138,28 @@ public class GP_02_0910_CanjuraOronaWilliams
         return voids;
     }
     
+    public static double getVoidAreaWall(ArrayList<ArrayList> allVoids)
+    {
+        ArrayList<Voids> voids = new ArrayList<Voids>();
+        double totalArea = 0;
+        
+        for (int i =0; i< allVoids.size(); i++)
+        {
+            voids = allVoids.get(i);
+            
+            for(int x = 0; x<voids.size(); x++)
+            {
+                totalArea += voids.get(i).getArea();
+            }
+        }
+        
+        return totalArea;
+    }
+    
     public static double getVoidArea(ArrayList<Voids> voids)
     {
         double totalArea = 0;
+        
         for(int i = 0; i<voids.size(); i++)
         {
             totalArea += voids.get(i).getArea();
@@ -166,8 +188,8 @@ public class GP_02_0910_CanjuraOronaWilliams
         return myBrick;
     }
      
-    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, Structure structure)
-    { 
+    public static void getCost(ArrayList<Voids> voids, double voidsArea, Bricks brick, Structure structure)
+    {         
         int totalBricks = brick.getTotalBricks(voidsArea, brick, structure);
         
         //gets cost of bricks
@@ -182,13 +204,18 @@ public class GP_02_0910_CanjuraOronaWilliams
         //gets total cost
         double cost = brickCost*discount[0] + mortarCost*discount[1]; 
         
+        double savings = (brickCost+mortarCost)-cost;
+        
+        String str_discount = String.format("$%,.2f",savings);
+        
         String str_cost = String.format("$%,.2f",cost);
         
         int doors = 0;
         int windows = 0;
-        for (int i =0; i< voids.size(); i++)
+        
+        for (int x = 0; x < voids.size(); x++)
         {
-            if (voids.get(i).getName()=="Door")
+            if (voids.get(x).getName().equals("Door"))
             {
                 doors += 1;
             }
@@ -197,6 +224,7 @@ public class GP_02_0910_CanjuraOronaWilliams
                 windows +=1;
             }
         }
+        
         
         //output
         System.out.println("Type of Brick: "+brick.getBrickType());     
@@ -213,10 +241,13 @@ public class GP_02_0910_CanjuraOronaWilliams
         System.out.println("Bricks: "+totalBricks);      
         System.out.println("Cost: "+str_cost);
         System.out.println("Cost includes any applicable discounts.");
+        System.out.println("Savings from Discount: "+str_discount);
     }
     
-    public static void getCost(ArrayList<Voids> voids,double voidsArea, Bricks brick, double totalProjectArea_ADB)
+    public static void getCost(ArrayList<ArrayList> allVoids,double voidsArea, Bricks brick, double totalProjectArea_ADB)
     { 
+        ArrayList<Voids> voids = new ArrayList<Voids>();
+        
         int totalBricks = brick.getTotalBricks(voidsArea, brick, totalProjectArea_ADB);
         
         double brickCost = MaterialCosts.costs(brick, totalBricks);
@@ -225,29 +256,38 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         //gets any discounts
         double [] discount = MaterialCosts.getDiscount();
-        System.out.println(discount[0]+" "+discount[1]);
         
         //gets total cost
         double cost = brickCost*discount[0] + mortarCost*discount[1]; 
+        
+        double savings = (brickCost+mortarCost)-cost;
+        
+        String str_discount = String.format("$%,.2f",savings);
         
         String str_cost = String.format("$%,.2f",cost);
         
         int doors = 0;
         int windows = 0;
-        for (int i =0; i< voids.size(); i++)
+        
+        for (int i =0; i< allVoids.size(); i++)
         {
-            if (voids.get(i).getName()=="Door")
+            voids = allVoids.get(i);
+            
+            for (int x = 0; x < voids.size(); x++)
             {
-                doors += 1;
+                if (voids.get(i).getName().equals("Door"))
+                {
+                    doors += 1;
+                }
+                else
+                {
+                    windows +=1;
+                } 
             }
-            else
-            {
-                windows +=1;
-            } 
         }
         
         System.out.println("Type of Brick: "+brick.getBrickType());
-        System.out.println("The total area for your wall(s) is: ");
+        System.out.println("The total area for your wall(s) minus voids is: ");
         System.out.println(totalProjectArea_ADB);
         System.out.println("You entered that your wall(s) have the following "
                 + "number of doors and windows:");
@@ -258,5 +298,6 @@ public class GP_02_0910_CanjuraOronaWilliams
         System.out.println("Bricks: "+totalBricks);      
         System.out.println("Cost: "+str_cost);
         System.out.println("Cost includes any applicable discounts.");
+        System.out.println("Savings from Discount: "+str_discount);
     }
 }
