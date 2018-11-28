@@ -104,7 +104,7 @@ public class MaterialCosts
         
         double brickDisc=0;
         double mortarDisc=0;
-        int discChoice = 0;
+        int discChoice = 0;     
         
         while (discChoice !=2)
         {
@@ -118,21 +118,30 @@ public class MaterialCosts
                 {
                     brickDisc = InputValidation.validateDouble(StandardMessages.Discount());
                     mortarDisc = 0;
+                    double [] discounts = {1-brickDisc, 1-mortarDisc};
+                    return discounts;
                 }
                 if (discType == 2)
                 {
                     mortarDisc = InputValidation.validateDouble(StandardMessages.Discount());
                     brickDisc = 0;
+                    
+                    double [] discounts = {1-brickDisc, 1-mortarDisc};
+                    return discounts;
                 }
             }
             else
             {
                 brickDisc = 0;
                 mortarDisc = 0;
-            }
-        }
-        double [] discounts = {1-brickDisc, 1-mortarDisc};
+                
+                double [] discounts = {1-brickDisc, 1-mortarDisc};
+                return discounts;
+            }    
+        } 
         
+        double [] discounts = {1-brickDisc, 1-mortarDisc};
         return discounts;
-    }
+    }    
+        
 }
