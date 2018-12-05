@@ -4,7 +4,9 @@ public class executeGUI
 {
       public static void launchEXE()
     {
-        String filePath = "C:/WindowsFormsApplication1.exe";
+        String workingDir = System.getProperty("user.dir");
+        
+        String filePath = workingDir+"/WindowsFormsApplication1.exe";
             try {
              
                 Process p = Runtime.getRuntime().exec(filePath);

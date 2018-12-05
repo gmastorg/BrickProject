@@ -17,7 +17,7 @@ public class StandardMessages
     public static String StructMenu()
     {
         String menu = "1.Get bricks for a wall\n2.Get bricks for a "
-                    + "structure\n";
+                    + "structure";
         
         return menu;
     }
