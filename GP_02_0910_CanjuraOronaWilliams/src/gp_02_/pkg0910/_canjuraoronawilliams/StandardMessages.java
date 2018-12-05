@@ -9,7 +9,7 @@ public class StandardMessages
 {
     public static String MainMenu()
     {
-        String menu = "1.Begin\n2.Exit";
+        String menu = "1.Execute with Console\n2.Execute with GUI\n3.Exit";
         
         return menu;
     }

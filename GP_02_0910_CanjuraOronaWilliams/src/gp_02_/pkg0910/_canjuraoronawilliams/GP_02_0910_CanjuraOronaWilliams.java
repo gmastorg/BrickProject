@@ -19,7 +19,7 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         do
         {   
-            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 2);
+            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 3);
             if (choice == 1 )
             {
                 int brickChoice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
@@ -27,8 +27,12 @@ public class GP_02_0910_CanjuraOronaWilliams
                 int structChoice = InputValidation.validateMenu(StandardMessages.StructMenu(), 2);
                 getChosenMethods(structChoice, myBrick);
             }
+            if (choice == 2)
+            {
+                executeGUI.launchEXE(); 
+            }
         }
-        while (choice != 2);
+        while (choice != 3);
     }
 
     public static void getChosenMethods(int choice, Bricks myBrick)
@@ -56,7 +60,10 @@ public class GP_02_0910_CanjuraOronaWilliams
  
         for(int wallnum = 0; wallnum <wallNumber; wallnum++)
         //User input for the length and width of the wall to be covered 
-        { 
+        {   
+            int  aWall = wallnum + 1;
+            System.out.println ( "Enter Dimensions for Wall   "+  aWall);  
+            
             length = InputValidation.validateDouble(StandardMessages.Length());
             
             width = InputValidation.validateDouble(StandardMessages.Width());
@@ -69,7 +76,7 @@ public class GP_02_0910_CanjuraOronaWilliams
             
             wallTotalarea_ADB += myWall.getArea();  
         } 
-        
+       
         // Total area of the voids aka Doors and windows 
         double voidTotalarea_ADB = getVoidAreaWall(allVoids);
         totalProjectArea_ADB =  (wallTotalarea_ADB - voidTotalarea_ADB); 
@@ -109,29 +116,30 @@ public class GP_02_0910_CanjuraOronaWilliams
         doors = InputValidation.validateInteger(StandardMessages.Doors());
                 
         ArrayList<Voids> voids = new ArrayList<Voids>();
-        
+       
         for (int i=0; i<doors; i++)
         {
             String name = "Door";
-            
+
             length = InputValidation.validateDouble(StandardMessages.Length());
-            
+
             width = InputValidation.validateDouble(StandardMessages.Width());  
-            
+
             voids.add(new Voids(name,length, width));
         }
+       
         
         windows = InputValidation.validateInteger(StandardMessages.Windows());
         
-        for (int i=0; i<windows; i++)
+         for (int i=0; i<windows; i++)
         {
             String name = "Window";
-            
+
             //collects windows dimensions and assigns them to an object
             length = InputValidation.validateDouble(StandardMessages.Length());
-            
+
             width = InputValidation.validateDouble(StandardMessages.Width());   
-            
+
             voids.add(new Voids(name,length, width));
         }
         
@@ -141,15 +149,16 @@ public class GP_02_0910_CanjuraOronaWilliams
     public static double getVoidAreaWall(ArrayList<ArrayList> allVoids)
     {
         ArrayList<Voids> voids = new ArrayList<Voids>();
+        
         double totalArea = 0;
         
         for (int i =0; i< allVoids.size(); i++)
         {
             voids = allVoids.get(i);
-            
+           
             for(int x = 0; x<voids.size(); x++)
             {
-                totalArea += voids.get(i).getArea();
+                totalArea += voids.get(x).getArea();
             }
         }
         
@@ -275,7 +284,7 @@ public class GP_02_0910_CanjuraOronaWilliams
             
             for (int x = 0; x < voids.size(); x++)
             {
-                if (voids.get(i).getName().equals("Door"))
+                if (voids.get(x).getName().equals("Door"))
                 {
                     doors += 1;
                 }
