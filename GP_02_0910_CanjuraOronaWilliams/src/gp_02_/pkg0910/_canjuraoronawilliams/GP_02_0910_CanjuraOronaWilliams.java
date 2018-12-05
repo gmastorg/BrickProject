@@ -19,7 +19,7 @@ public class GP_02_0910_CanjuraOronaWilliams
         
         do
         {   
-            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 2);
+            choice = InputValidation.validateMenu(StandardMessages.MainMenu(), 3);
             if (choice == 1 )
             {
                 int brickChoice = InputValidation.validateMenu(StandardMessages.BrickMenu(), 3);
@@ -27,8 +27,12 @@ public class GP_02_0910_CanjuraOronaWilliams
                 int structChoice = InputValidation.validateMenu(StandardMessages.StructMenu(), 2);
                 getChosenMethods(structChoice, myBrick);
             }
+            if (choice == 2)
+            {
+                executeGUI.launchEXE(); 
+            }
         }
-        while (choice != 2);
+        while (choice != 3);
     }
 
     public static void getChosenMethods(int choice, Bricks myBrick)

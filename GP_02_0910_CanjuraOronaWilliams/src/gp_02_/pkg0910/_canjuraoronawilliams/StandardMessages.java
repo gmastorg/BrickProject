@@ -9,7 +9,7 @@ public class StandardMessages
 {
     public static String MainMenu()
     {
-        String menu = "1.Begin\n2.Exit";
+        String menu = "1.Execute with Console\n2.Execute with GUI\n3.Exit";
         
         return menu;
     }
@@ -17,7 +17,7 @@ public class StandardMessages
     public static String StructMenu()
     {
         String menu = "1.Get bricks for a wall\n2.Get bricks for a "
-                    + "structure";
+                    + "structure\n";
         
         return menu;
     }
