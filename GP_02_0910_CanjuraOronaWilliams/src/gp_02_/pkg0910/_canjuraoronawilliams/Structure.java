@@ -61,7 +61,7 @@ public class Structure
        double totalWidth = structureWidth*structureHeight;
 
        double structureSurfaceArea = (totalLength + totalWidth)*2;
-       
+
        return structureSurfaceArea;
     }
 }
